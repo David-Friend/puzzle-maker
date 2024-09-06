@@ -85,7 +85,7 @@ function createBoard(){
     const columns = [{property:column1.property, value:column1.value},{property:column2.property, value:column2.value},{property:column3.property, value:column3.value}]
 
 
-    fetch("https://localhost8080/makepuzzle", {
+    fetch(`http://localhost:8080/makepuzzle`, {
         method: "POST",
         body: JSON.stringify({
             rows:rows,
