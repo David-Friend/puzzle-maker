@@ -70,16 +70,27 @@ function changeColumn(id,key,value){
             break
         }
 }
+function getDate(date){
+    let x = date
+    if (x) {
+        x = x.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match,y,m,d) {
+            return m + '/' + d + '/' + y;
+        });
+    }
+    return x
+}
 
 function createBoard(){
     const rows = [{property:row1.property, value:row1.value},{property:row2.property, value:row2.value},{property:row3.property, value:row3.value}]
     const columns = [{property:column1.property, value:column1.value},{property:column2.property, value:column2.value},{property:column3.property, value:column3.value}]
+
+
     fetch("https://localhost8080/makepuzzle", {
         method: "POST",
         body: JSON.stringify({
             rows:rows,
             columns: columns,
-            createdDate: date.toLocaleDateString(),
+            createdDate: date,
         }),
         headers: {
             'Content-type': 'application/json'
@@ -108,9 +119,9 @@ return (
         <Cell row={row2} column={column1}/> <Cell row={row2} column={column2}/> <Cell row={row2} column={column3}/>
         <Cell row={row3} column={column1}/> <Cell row={row3} column={column2}/> <Cell row={row3} column={column3}/>
         </div>
-        <form>
+        <form onSubmit={(e)=>{e.preventDefault();createBoard()}}>
         <label>Date:</label>
-        <input type='date' onChange={(e)=>setDate(e.target.value)}/>
+        <input type='date' onChange={(e)=>setDate(getDate(e.target.value))}/>
         <button>Submit</button>
         </form>
     </div>
