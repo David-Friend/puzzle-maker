@@ -29,3 +29,4 @@ app.listen(8080, () => {
 })
 
 require('./routes/card.routes')(app)
+require('./routes/puzzle.routes')(app)

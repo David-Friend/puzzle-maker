@@ -10,7 +10,7 @@ const [row3, setRow3] = useState({property:'notLoaded', value:'default'})
 const [column1, setCol1] = useState({property:'notLoaded', value:'default'})
 const [column2, setCol2] = useState({property:'notLoaded', value:'default'})
 const [column3, setCol3] = useState({property:'notLoaded', value:'default'})
-
+const [date,setDate] = useState(Date.now)
 
 function changeRow(id,key,value){
 switch(id){
@@ -57,8 +57,6 @@ function changeBoth(id,data){
 }
 
 
-
-
 function changeColumn(id,key,value){
     switch(id){
         case 0:
@@ -72,6 +70,25 @@ function changeColumn(id,key,value){
             break
         }
 }
+
+function createBoard(){
+    const rows = [{property:row1.property, value:row1.value},{property:row2.property, value:row2.value},{property:row3.property, value:row3.value}]
+    const columns = [{property:column1.property, value:column1.value},{property:column2.property, value:column2.value},{property:column3.property, value:column3.value}]
+    fetch("https://localhost8080/makepuzzle", {
+        method: "POST",
+        body: JSON.stringify({
+            rows:rows,
+            columns: columns,
+            createdDate: date.toLocaleDateString(),
+        }),
+        headers: {
+            'Content-type': 'application/json'
+        }
+    })
+}
+
+
+
 
 return (
     <div>
@@ -93,7 +110,7 @@ return (
         </div>
         <form>
         <label>Date:</label>
-        <input type='date'/>
+        <input type='date' onChange={(e)=>setDate(e.target.value)}/>
         <button>Submit</button>
         </form>
     </div>
