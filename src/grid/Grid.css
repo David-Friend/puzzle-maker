@@ -1,0 +1,30 @@
+.cellContainer{
+    display: grid;
+    gap: 3px;
+    row-gap: 1px;
+    grid-template-columns: repeat(4, minmax(0px, 1fr));
+    justify-self: center;
+    max-width: 900px;
+    max-height: 900px;
+    position: relative;
+    left:40%;
+    transform: translateX(-50%);
+    margin-top: 50px;
+}
+
+.columnLabels{
+    display: flex;
+    align-items: flex-end;
+    grid-column: 2 / 5;
+    justify-content: space-around;
+    margin-bottom: 2px;
+}
+
+.rowLabels{
+    grid-row: 2 / 5;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    justify-content: end;
+}
+
