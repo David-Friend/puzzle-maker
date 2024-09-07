@@ -15,7 +15,7 @@ function postBoard(req,res){
     catch(err){
         console.error(err)
     }
-    res.send('submitted')
+    res.send({message:'submitted'})
 }
 
 

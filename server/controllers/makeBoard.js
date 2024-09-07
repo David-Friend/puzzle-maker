@@ -99,11 +99,11 @@ function pickValue(){
     else{
         propertyKeys = Object.keys(card).filter((prop)=> getLegalProperty().includes(prop))
     }
-
+    console.log(propertyKeys)
     const propertyIndex = Math.floor(Math.random() * propertyKeys.length)
     const randomProperty = propertyKeys[propertyIndex]
     const cardValues = card[randomProperty]
-    console.log(randomProperty,cardValues)
+
     let randomItem
     if(randomProperty == 'type'){
 

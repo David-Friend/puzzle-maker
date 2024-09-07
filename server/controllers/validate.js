@@ -8,7 +8,7 @@ exports.validate = function(req,res){
     let solutions =0
     query[request.rowProp] = request.rowVal
     query[request.columnProp]=request.columnVal
-    Card.find(query)
+    Card.find({$and: [query]})
     .then((cards)=>{
         if(cards.length!=0){
             solutions=cards.length

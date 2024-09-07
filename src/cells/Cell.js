@@ -31,10 +31,8 @@ export default function Cell({row, column}) {
   return (
     <div className='cell' style={{backgroundColor:getColor()}}>
         <p>{solutions} Answer(s)</p>
-        <p>Row Property: {row.property}</p>
-        <p>Row Value: {row.value}</p>
-        <p>Column Property: {column.property}</p>
-        <p>Column Value: {column.value}</p>
+        <p>{row.property} : {row.value}</p>
+        <p>{column.property} : {column.value}</p>
 
     </div>
   )
