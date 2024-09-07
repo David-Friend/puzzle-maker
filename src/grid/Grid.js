@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Cell from '../cells/Cell'
 import Label from '../labels/Label'
 import './Grid.css'
@@ -10,7 +10,10 @@ const [row3, setRow3] = useState({property:'notLoaded', value:'default'})
 const [column1, setCol1] = useState({property:'notLoaded', value:'default'})
 const [column2, setCol2] = useState({property:'notLoaded', value:'default'})
 const [column3, setCol3] = useState({property:'notLoaded', value:'default'})
+const [duplicate,setDuplicate] = useState(false)
+const [dupeDate,setDupeDate] = useState(0)
 const [date,setDate] = useState(Date.now)
+
 
 function changeRow(id,key,value){
 switch(id){
@@ -96,14 +99,64 @@ function createBoard(){
             'Content-type': 'application/json'
         }
     })
+    .then((r)=>{
+        if(r.ok){
+            resetAll()
+        }
+    })
 }
 
+function randomizeAll(){
+    fetch(`http://localhost:8080/board`).then((r)=>{
+        if(r.ok){
+          r.json()
+          .then((d)=>{
+            console.log(d)
+            setRow1(d.rows[0])
+            setRow2(d.rows[1])
+            setRow3(d.rows[2])
+            setCol1(d.columns[0])
+            setCol2(d.columns[1])
+            setCol3(d.columns[2])
+        })
+        }
+      })
+}
 
+function resetAll(){
+            setRow1({property:'notLoaded', value:'default'})
+            setRow2({property:'notLoaded', value:'default'})
+            setRow3({property:'notLoaded', value:'default'})
+            setCol1({property:'notLoaded', value:'default'})
+            setCol2({property:'notLoaded', value:'default'})
+            setCol3({property:'notLoaded', value:'default'})
+}
+
+function checkDupes(){
+    fetch(`http://localhost:8080/checkduplicate`,{
+        method:'POST',
+        body:JSON.stringify({
+            rows:[row1,row2,row3],
+            columns:[column1,column2,column3]
+        }),
+        headers:{'Content-type':'application/json'}
+    })
+        .then((r)=>{
+            if(r.ok){
+                r.json().then((d)=>{
+                    if(d.date!=0){
+                        setDuplicate(true)
+                        setDupeDate(d)
+                    }
+                })
+            }
+        })
+}
 
 
 return (
     <div>
-        <button>Randomize All</button>
+        <button onClick={randomizeAll}>Randomize All</button>
         <div className='cellContainer'>
         <div className='rowLabels'>
            <Label data={row1} id={{axis:'row',number:0}} changeLabel={changeRow} changeBoth={changeBoth}/>
@@ -119,6 +172,9 @@ return (
         <Cell row={row2} column={column1}/> <Cell row={row2} column={column2}/> <Cell row={row2} column={column3}/>
         <Cell row={row3} column={column1}/> <Cell row={row3} column={column2}/> <Cell row={row3} column={column3}/>
         </div>
+        <h4 style={{color:duplicate?'red':'green'}}>{duplicate?`Duplicate Puzzle! Created ${dupeDate}`:'Unique'}</h4>
+
+
         <form onSubmit={(e)=>{e.preventDefault();createBoard()}}>
         <label>Date:</label>
         <input type='date' onChange={(e)=>setDate(getDate(e.target.value))}/>

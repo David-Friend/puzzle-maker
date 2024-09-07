@@ -73,10 +73,12 @@ const illegalTypeParings = {
 
 function getLegalProperty(){
     let legal  = Object.keys(card)
+    /*
     for(prop of usedProperties){
         const badprops = illegalPropertyParings[prop]
         legal =legal.filter((element)=>!badprops.includes(element))
     }
+        */
     return legal
 }
 
@@ -138,7 +140,10 @@ function getBoard(){
 
 exports.getValue = function(req,res){
     v=pickValue()
-
    res.send(v)
+}
+exports.generate = function(req,res){
+    board = getBoard()
+    res.send(board)
 }
 

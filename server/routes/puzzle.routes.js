@@ -19,6 +19,20 @@ function postBoard(req,res){
 }
 
 
+function duplicateCheck(req,res){
+    const data=req.body
+    Puzzle.findOne({$and: [data.rows,data.columns]})
+    .then((puzzle)=>{
+        if(puzzle){
+            res.send(JSON.stringify({date:'0'}))
+        }
+        else{
+            res.send(JSON.stringify({date:puzzle.createdDate}))
+        }
+    })
+}
+
+
 
 
 
@@ -31,6 +45,7 @@ module.exports = function(app) {
     });
 
     app.post('/makepuzzle',(req,res)=>postBoard(req,res))
+    app.post('/checkduplicate', (req,res)=>duplicateCheck(req,res))
 
 
 }

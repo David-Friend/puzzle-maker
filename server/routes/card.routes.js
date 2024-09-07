@@ -11,6 +11,7 @@ module.exports = function(app) {
 
 
 app.get('/randomize',(req,res)=>make.getValue(req,res))
+app.get('/board',(req,res)=>make.generate(req,res))
 app.get('/validate/:rowProp/:rowVal/:columnProp/:columnVal',(req,res)=>validate.validate(req,res))
 
 

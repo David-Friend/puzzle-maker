@@ -5,7 +5,7 @@ const db = require('./models')
 
 app.use(cors())
 db.mongoose
-  .connect(`mongodb://localhost:27017/yugidoku_db`)
+  .connect(`mongodb+srv://ygodoku:MelffyRabby@ygodoku.get2i.mongodb.net/ygodoku_db`)
 
   .then(() => {
     console.log("Successfully connected to MongoDB.");
