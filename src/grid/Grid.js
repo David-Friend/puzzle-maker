@@ -74,13 +74,10 @@ function changeColumn(id,key,value){
         }
 }
 function getDate(date){
-    let x = date
-    if (x) {
-        x = x.replace(/(\d{4})-(\d{1,2})-(\d{1,2})/, function(match,y,m,d) {
-            return m + '/' + d + '/' + y;
-        });
-    }
-    return x
+    const d = new Date(date)
+    d.setHours(0,0,0,0)
+   console.log(d)
+    return d
 }
 
 function createBoard(){

@@ -3,11 +3,14 @@ Puzzle = db.puzzle
 
 function postBoard(req,res){
     const board = req.body
+    const created = new Date(board.createdDate)
+    created.setDate(created.getDate()+1)
+    created.setHours(0,0,0,0)
 
     const newPuzzle = new Puzzle({
         rows:board.rows,
         columns:board.columns,
-        createdDate: board.createdDate
+        createdDate: created
     })
     try{
         newPuzzle.save()

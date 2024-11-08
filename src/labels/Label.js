@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Label.css'
 export default function Label({data, id, changeLabel, changeBoth}) {
     const [img,setImg] = useState('')
-
+    
     useEffect(()=>{
         getImage()
     },[data.property,data.value])
