@@ -76,6 +76,15 @@ const Card = mongoose.model(
             minimum:0
         },
 
+        handtrap:{
+            type:String,
+            default:'false',
+        },
+        floodgate:{
+            type:String,
+            default:'false',
+        },
+
         md_rarity:{
             type:String,
             required:false,
@@ -106,8 +115,7 @@ const Card = mongoose.model(
             required:false,
             default:null
         },
-        effect:[{type:mongoose.Schema.Types.ObjectId,
-                ref:'Effect',
+        effects:[{type:String,
                 required:false,
                 default:null
             }]

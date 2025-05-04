@@ -13,8 +13,8 @@ attribute : [ 'fire', 'water', 'earth', 'wind', 'dark', 'light'],
 type : ['normal', 'effect', 'ritual', 'fusion', 'synchro', 'xyz', 'pendulum', 'link','tuner','spirit', 'toon', 'union', 'gemini', 'flip'],
 
 race : ['aqua', 'beast-warrior', 'beast', 'cyberse', 'dinosaur', 'dragon', 'fairy','fiend', 'fish',
-        'insect', 'machine', 'plant', 'psychic', 'pyro', 'reptile','rock', 'sea-serpent', 'spellcaster',
-        'illusion', 'thunder', 'warrior', 'winged-beast', 'wyrm', 'zombie'],
+        'insect', 'machine', 'plant', 'psychic', 'pyro', 'reptile','rock', 'sea serpent', 'spellcaster',
+        'illusion', 'thunder', 'warrior', 'winged beast', 'wyrm', 'zombie'],
 
 level : [1,2,3,4,5,6,7,8,9,10],
 
@@ -30,10 +30,15 @@ atk: [randomStat()],
 
 def: [randomStat()],
 
-tcg_status:['banned','semi-limited','limited','unlimited'],
+handtrap: ['true'],
+
+floodgate: ['true'],
+
+tcg_status:['forbidden','semi-limited','limited','unlimited'],
+
+ocg_status:['forbidden','semi-limited','limited','unlimited'],
 /* idk if I want this in the final product, but I might in the future */
-//ocg_status:['banned','semi-limited','limited','unlimited'],
-md_status:['banned','semi-limited','limited','unlimited'],
+md_status:['forbidden','semi-limited','limited','unlimited'],
 md_rarity: ['normal','rare','super rare', 'ultra rare'],
 }
 
